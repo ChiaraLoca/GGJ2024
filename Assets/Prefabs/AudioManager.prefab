@@ -175,9 +175,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music: {fileID: 7506731016512066016}
-  track1: {fileID: 8300000, guid: 6d80d38b9290c6445abe37c55f4d64b6, type: 3}
+  track1: {fileID: 8300000, guid: 85960b84b63de304b8479cd9b28c064d, type: 3}
   track2: {fileID: 8300000, guid: 94d2ecd092cd3f54aba65c91bc48d534, type: 3}
   track3: {fileID: 8300000, guid: 7c64ae02eb3712e40b2ed992e00ff3ef, type: 3}
+  switchTrack: {fileID: 8300000, guid: 0953ac144a581024eb3ffa1bb7cf7b18, type: 3}
   fx: {fileID: 4563000290780807572}
 --- !u!1 &7506731016512066016
 GameObject:

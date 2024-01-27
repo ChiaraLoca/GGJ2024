@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,13 @@ public class StaticAudioSourceManager : MonoBehaviour
     [SerializeField] AudioClip track1;
     [SerializeField] AudioClip track2;
     [SerializeField] AudioClip track3;
+    [SerializeField] AudioClip switchTrack;
     [SerializeField] GameObject fx;
+    Coroutine coroutine;
     // Start is called before the first frame update
     void Start()
     {
-        track(1);
+        track(1, true);
     }
 
     // Update is called once per frame
@@ -21,31 +24,51 @@ public class StaticAudioSourceManager : MonoBehaviour
         
     }
 
-    public void track(int trackIndex)
+    public void track(int trackIndex, bool firstStart)
     {
         AudioSource musicAudioSource = music.GetComponent<AudioSource>();
-
+        AudioClip nextTrack;
         switch (trackIndex)
         {
             case 1:
-                musicAudioSource.Stop();
-                musicAudioSource.clip = track1;
-                musicAudioSource.loop = true;
-                musicAudioSource.Play();
+                nextTrack = track1;
+                
                 break;
             case 2:
-                musicAudioSource.Stop();
-                musicAudioSource.clip = track2;
-                musicAudioSource.loop = true;
-                musicAudioSource.Play();
+                nextTrack = track2;
                 break;
             case 3:
-                musicAudioSource.Stop();
-                musicAudioSource.clip = track3;
-                musicAudioSource.loop = true;
-                musicAudioSource.Play();
+                nextTrack = track3;
                 break;
-            
+            default:
+                nextTrack = track1;
+                break;
         }
+
+        if(coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = StartCoroutine(musicChangeCorutine(musicAudioSource, nextTrack, firstStart));
+
+
     }
+
+    private IEnumerator musicChangeCorutine(AudioSource musicAudioSource, AudioClip track, bool firstStart)
+    {
+        if (!firstStart) {
+            musicAudioSource.Stop();
+            musicAudioSource.clip = switchTrack;
+            musicAudioSource.loop = false;
+            musicAudioSource.Play();
+            yield return new WaitForSeconds(switchTrack.length);
+        }
+        musicAudioSource.clip = track;
+        musicAudioSource.loop = true;
+        musicAudioSource.Play();
+    }
+
+
+
 }

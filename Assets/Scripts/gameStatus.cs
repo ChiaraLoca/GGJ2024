@@ -68,6 +68,6 @@ public class gameStatus : MonoBehaviour
 
     private void changeMusic(int v)
     {
-       audioManager.track(v);
+       audioManager.track(v, false);
     }
 }
