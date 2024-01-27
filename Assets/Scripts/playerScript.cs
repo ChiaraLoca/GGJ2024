@@ -77,6 +77,7 @@ public class playerScript : MonoBehaviour
     private void obstacleImpact(Collider2D collision)
     {
         modifySpeed(collision.gameObject.GetComponent<obstacle>().StackValue);
+        PsychCounter.Instance.DeleteMushrooms();
         collision.enabled = false;
     }
 
