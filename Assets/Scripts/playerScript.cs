@@ -22,6 +22,8 @@ public class playerScript : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         collider2D = GetComponent<Collider2D>();
         rigidbody2D.velocity = new Vector2(horizontalAcceleration, 0f);
+       
+
     }
 
     // Update is called once per frame
@@ -87,7 +89,10 @@ public class playerScript : MonoBehaviour
     private void collectMushroom(Collider2D collision)
     {
         gameStatus.Mushrooms++;
+        PsychCounter.Instance.AddMushrooms();
         modifySpeed(collision.gameObject.GetComponent<mushroom>().StackValue);
         collision.gameObject.SetActive(false);
     }
+
+ 
 }
