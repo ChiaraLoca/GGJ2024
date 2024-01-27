@@ -38,6 +38,7 @@ public class playerScript : MonoBehaviour
     {
         if (horizontalMaxSpeed<baseSpeedIncrease && !dead) {
             Debug.Log("DEATH TRIGGER");
+            horizontalMaxSpeed = 0f;
             dead= true;
         }
     }
