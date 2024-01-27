@@ -1,20 +1,44 @@
 
 using System;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
 public class KeywordRecognizerManager : MonoBehaviour
 {
+    public static KeywordRecognizerManager Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
 
-    [SerializeField]
-    private string[] m_Keywords;
+    private string[] _keyWord;
 
     private KeywordRecognizer m_Recognizer;
+    
 
     void Start()
     {
-        m_Recognizer = new KeywordRecognizer(m_Keywords);
+        _keyWord = new string[1];
+        _keyWord[0] = "Yes";
+        m_Recognizer = new KeywordRecognizer(_keyWord);
+        m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
+
+        m_Recognizer.Start();
+    }
+
+    public void Add(string s)
+    {
+        _keyWord[0] = s;
+        Restart();
+
+    }
+    public void Restart()
+    {
+        m_Recognizer.Dispose();
+        m_Recognizer = null;
+        m_Recognizer = new KeywordRecognizer(_keyWord);
         m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
         m_Recognizer.Start();
     }
