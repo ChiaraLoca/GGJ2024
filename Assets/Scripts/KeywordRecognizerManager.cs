@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,7 +10,7 @@ public class KeywordRecognizerManager : MonoBehaviour
     public static KeywordRecognizerManager Instance;
     private bool isUsable = true;
 
-    public WordManager _wordManager = new WordManager();
+   
     private void Awake()
     {
         Instance = this;
@@ -57,6 +56,7 @@ public class KeywordRecognizerManager : MonoBehaviour
             _keyWordList[index] = s;
             res = true;
         }
+        WordManager.Instance.Add(new Word(s.ToLower()));
         Restart();
         return res;
 
@@ -73,6 +73,8 @@ public class KeywordRecognizerManager : MonoBehaviour
                 m_Recognizer.Start();
             }
     }
+
+
 
     private void OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {
@@ -91,7 +93,7 @@ public class KeywordRecognizerManager : MonoBehaviour
 
     internal string GetRandomKeyWord(int index)
     {
-        string key= _wordManager.GetRandomKeyWord(_keyWordList);
+        string key= WordManager.Instance.GetRandomKeyWord(_keyWordList);
         bool res = Add(key, index);
         if (res)
             return key;
@@ -102,49 +104,6 @@ public class KeywordRecognizerManager : MonoBehaviour
 
         
     }
-}
-public class WordManager
-{
-    List<Word> _wordList = new List<Word>();
 
-    public WordManager()
-    {
-        _wordList = new List<Word>() { new Word("yes"), new Word("posa"), new Word("start"), new Word("exit"), new Word("settings"), new Word("scoreggia"), new Word("pillola"),new Word("banana") };
-    }
-
-    public void Add(Word s)
-    {
-        if (!_wordList.Contains(s))
-        { _wordList.Add(s); }
-    }
-
-
-
-    internal string GetRandomKeyWord(List<String> list)
-    {
-        
-        string res = "";
-        while (res.Equals(""))
-        {
-            int index = UnityEngine.Random.Range(0, _wordList.Count);
-            string s= _wordList[index].value;
-            if (!list.Contains(s.ToLower()))
-            {
-                res = s;
-            }
-        }
-        return res;
-        
-    }
-}
-
-[Serializable]
-public class Word
-{
-    public string value;
-
-    public Word(string value)
-    {
-        this.value = value;
-    }
+    
 }
