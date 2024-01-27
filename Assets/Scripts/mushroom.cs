@@ -27,7 +27,7 @@ public class mushroom : MonoBehaviour
 
     private void IdleFloat()
     {
-        float speed = baseSpeed * gameStatus.SogliaAttuale;
+        float speed = baseSpeed * gameStatus.instance.SogliaAttuale;
         float xcount = UnityEngine.Random.Range(-speed, speed);
         float ycount = UnityEngine.Random.Range(-speed, speed);
         transform.position += new Vector3(xcount, ycount, 0);

@@ -15,15 +15,13 @@ public class playerScript : MonoBehaviour
 
     Rigidbody2D rigidbody2D;
     Collider2D collider2D;
-    AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         collider2D = GetComponent<Collider2D>();
         rigidbody2D.velocity = new Vector2(horizontalAcceleration, 0f);
-        audioSource = GetComponent<AudioSource>();
-        audioSource.Play();
     }
 
     // Update is called once per frame
@@ -84,13 +82,13 @@ public class playerScript : MonoBehaviour
 
     private void modifySpeed(int v)
     {
-        gameStatus.SpeedStack += v;
-        horizontalMaxSpeed = gameStatus.SpeedStack * baseSpeedIncrease;
+        gameStatus.instance.SpeedStack += v;
+        horizontalMaxSpeed = gameStatus.instance.SpeedStack * baseSpeedIncrease;
     }
 
     private void collectMushroom(Collider2D collision)
     {
-        gameStatus.Mushrooms++;
+        gameStatus.instance.Mushrooms++;
         PsychCounter.Instance.AddMushrooms();
         CheckSoglia();
         modifySpeed(collision.gameObject.GetComponent<mushroom>().StackValue);
@@ -99,34 +97,34 @@ public class playerScript : MonoBehaviour
 
     private void CheckSoglia()
     {
-        switch(gameStatus.SogliaAttuale)
+        switch(gameStatus.instance.SogliaAttuale)
         {
             case 1:
                 {
-                    if (PsychCounter.Instance.GetMushrooms() >= gameStatus.primaSoglia)
+                    if (PsychCounter.Instance.GetMushrooms() >= gameStatus.instance.primaSoglia)
                     {
-                        gameStatus.ChangeStatus(2);
+                        gameStatus.instance.ChangeStatus(2);
                     }
                     break;
                 }
             case 2:
                 {
-                    if (PsychCounter.Instance.GetMushrooms() >= gameStatus.secondaSoglia)
+                    if (PsychCounter.Instance.GetMushrooms() >= gameStatus.instance.secondaSoglia)
                     {
-                        gameStatus.ChangeStatus(3);
+                        gameStatus.instance.ChangeStatus(3);
                     }
-                    if (PsychCounter.Instance.GetMushrooms() < gameStatus.primaSoglia)
+                    if (PsychCounter.Instance.GetMushrooms() < gameStatus.instance.primaSoglia)
                     {
-                        gameStatus.ChangeStatus(1);
+                        gameStatus.instance.ChangeStatus(1);
                     }
                     break;
                 }
             case 3:
                 {
                  
-                    if (PsychCounter.Instance.GetMushrooms() < gameStatus.secondaSoglia)
+                    if (PsychCounter.Instance.GetMushrooms() < gameStatus.instance.secondaSoglia)
                     {
-                        gameStatus.ChangeStatus(2);
+                        gameStatus.instance.ChangeStatus(2);
                     }
                     break;
                 }

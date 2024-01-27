@@ -5,21 +5,23 @@ using UnityEngine;
 
 public class gameStatus : MonoBehaviour
 {
-    [SerializeField] static int mushrooms = 0;
-    [SerializeField] static int mushroomsMax;
-    [SerializeField] static int speedStack = 1;
-    [SerializeField] public static int primaSoglia;
-    [SerializeField] public static int secondaSoglia;
-    private static int sogliaAttuale = 1;
-    public static int Mushrooms { get => mushrooms; set => mushrooms = value; }
-    public static int SpeedStack { get => speedStack; set => speedStack = value; }
-    public static int SogliaAttuale { get => sogliaAttuale; }
+    [SerializeField] public int mushrooms = 0;
+    [SerializeField] public int mushroomsMax;
+    [SerializeField] public int speedStack = 1;
+    [SerializeField] public int primaSoglia;
+    [SerializeField] public int secondaSoglia;
+    [SerializeField] public StaticAudioSourceManager audioManager;
+    private int sogliaAttuale = 1;
+    public int Mushrooms { get => mushrooms; set => mushrooms = value; }
+    public int SpeedStack { get => speedStack; set => speedStack = value; }
+    public int SogliaAttuale { get => sogliaAttuale; }
 
+    public static gameStatus instance;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        instance = this;
     }
 
     // Update is called once per frame
@@ -28,7 +30,7 @@ public class gameStatus : MonoBehaviour
         
     }
 
-    public static void ChangeStatus(int status)
+    public void ChangeStatus(int status)
     {
         switch(status) 
         {
@@ -59,13 +61,13 @@ public class gameStatus : MonoBehaviour
         }
     }
 
-    private static void changePsych(int v)
+    private void changePsych(int v)
     {
         
     }
 
-    private static void changeMusic(int v)
+    private void changeMusic(int v)
     {
-        
+       audioManager.track(v);
     }
 }
