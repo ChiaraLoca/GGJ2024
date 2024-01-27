@@ -7,11 +7,8 @@ using UnityEngine;
 public class playerScript : MonoBehaviour
 {
     [SerializeField] float horizontalAcceleration;
-    [SerializeField] int speedStack = 1;
     [SerializeField] float horizontalStartingMaxSpeed;
     [SerializeField] float horizontalMaxSpeed;
-    [SerializeField] int mushrooms = 0;
-    [SerializeField] int mushroomsMax;
     [SerializeField] float baseSpeedIncrease;
     [SerializeField] int jumpSpeed;
     [SerializeField] bool dead = false;
@@ -43,12 +40,14 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    private void Jump()
+    public void Jump(bool voiceTrigger = false)
     {
-        if (Input.GetKeyUp("space"))
+        if (Input.GetKeyUp("space") || voiceTrigger)
         {
             rigidbody2D.velocity += new Vector2(0f, jumpSpeed);
-        } 
+        }
+
+        
     }
 
     private void Run()
@@ -81,13 +80,13 @@ public class playerScript : MonoBehaviour
 
     private void modifySpeed(int v)
     {
-        speedStack += v;
-        horizontalMaxSpeed = speedStack * baseSpeedIncrease;
+        gameStatus.SpeedStack += v;
+        horizontalMaxSpeed = gameStatus.SpeedStack * baseSpeedIncrease;
     }
 
     private void collectMushroom(Collider2D collision)
     {
-        mushrooms++;
+        gameStatus.Mushrooms++;
         modifySpeed(collision.gameObject.GetComponent<mushroom>().StackValue);
         collision.gameObject.SetActive(false);
     }

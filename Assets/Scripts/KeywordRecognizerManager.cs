@@ -16,7 +16,8 @@ public class KeywordRecognizerManager : MonoBehaviour
     private string[] _keyWord;
 
     private KeywordRecognizer m_Recognizer;
-    
+
+    public event Action<String> PhraseRecognized;
 
     void Start()
     {
@@ -50,5 +51,8 @@ public class KeywordRecognizerManager : MonoBehaviour
         builder.AppendFormat("\tTimestamp: {0}{1}", args.phraseStartTime, Environment.NewLine);
         builder.AppendFormat("\tDuration: {0} seconds{1}", args.phraseDuration.TotalSeconds, Environment.NewLine);
         Debug.Log(builder.ToString());
+
+        if (PhraseRecognized != null)
+            PhraseRecognized.Invoke(args.text);
     }
 }

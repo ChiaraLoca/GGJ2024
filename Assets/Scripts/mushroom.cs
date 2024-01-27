@@ -11,7 +11,7 @@ public class mushroom : MonoBehaviour
     [SerializeField] float maxOffsetLeft;
     [SerializeField] float maxOffsetRight;*/
     [SerializeField] int stackValue;
-    [SerializeField] float speed;
+    [SerializeField] float baseSpeed;
     [SerializeField] float maxDistance;
     Vector3 startingPosition;
 
@@ -31,9 +31,8 @@ public class mushroom : MonoBehaviour
 
     private void IdleFloat()
     {
-        
+        float speed = baseSpeed * gameStatus.SpeedStack;
         float xcount = UnityEngine.Random.Range(-speed, speed);
- 
         float ycount = UnityEngine.Random.Range(-speed, speed);
         transform.position += new Vector3(xcount, ycount, 0);
         Vector3 movementVector = transform.position - startingPosition;
