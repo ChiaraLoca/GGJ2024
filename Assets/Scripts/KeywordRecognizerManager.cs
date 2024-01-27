@@ -9,6 +9,7 @@ using UnityEngine.Windows.Speech;
 public class KeywordRecognizerManager : MonoBehaviour
 {
     public static KeywordRecognizerManager Instance;
+    private bool isUsable = true;
     private void Awake()
     {
         Instance = this;
@@ -31,11 +32,16 @@ public class KeywordRecognizerManager : MonoBehaviour
         catch (Exception)
         {
             Debug.Log("Speech Recognition NOT supported");
+            isUsable = false;
         }
 
-        m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
+        if (isUsable)
+        {
+            m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
 
-        m_Recognizer.Start();
+            m_Recognizer.Start();
+        }
+
     }
 
     public void Add(string s)
@@ -46,11 +52,14 @@ public class KeywordRecognizerManager : MonoBehaviour
     }
     public void Restart()
     {
-        m_Recognizer.Dispose();
-        m_Recognizer = null;
-        m_Recognizer = new KeywordRecognizer(_keyWord);
-        m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
-        m_Recognizer.Start();
+        if (isUsable)
+        {
+            m_Recognizer.Dispose();
+            m_Recognizer = null;
+            m_Recognizer = new KeywordRecognizer(_keyWord);
+            m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
+            m_Recognizer.Start();
+        }  
     }
 
     private void OnPhraseRecognized(PhraseRecognizedEventArgs args)
