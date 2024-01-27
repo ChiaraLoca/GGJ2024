@@ -44,6 +44,9 @@ TagManager:
   - name: Background
     uniqueID: 496608533
     locked: 0
+  - name: Pavimento
+    uniqueID: 1658855247
+    locked: 0
   - name: Mushroom
     uniqueID: 2715860037
     locked: 0
