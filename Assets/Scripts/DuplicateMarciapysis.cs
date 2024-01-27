@@ -17,7 +17,7 @@ public class DuplicateMarciapysis : MonoBehaviour
     {
         
     }
-
+/**
     private void OnValidate()
     {
         
@@ -27,4 +27,5 @@ public class DuplicateMarciapysis : MonoBehaviour
             newInstance.transform.position = new Vector3(newInstance.size.x * i, 0, 0);
         }
     }
+*/
 }
