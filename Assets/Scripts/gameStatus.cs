@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,11 @@ public class gameStatus : MonoBehaviour
     [SerializeField] static int speedStack = 1;
     [SerializeField] public static int primaSoglia;
     [SerializeField] public static int secondaSoglia;
-    public static int sogliaAttuale =1;
+    private static int sogliaAttuale = 1;
     public static int Mushrooms { get => mushrooms; set => mushrooms = value; }
     public static int SpeedStack { get => speedStack; set => speedStack = value; }
-    
+    public static int SogliaAttuale { get => sogliaAttuale; }
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,24 +35,37 @@ public class gameStatus : MonoBehaviour
             case 1:
                 {
                     sogliaAttuale = 1;
-
+                    changeMusic(1);
+                    changePsych(1);
                     //FARE COSE
                     break;
                 }
             case 2:
                 {
                     sogliaAttuale = 2;
-
+                    changeMusic(2);
+                    changePsych(2);
                     //FARE COSE
                     break;
                 }
             case 3:
                 {
                     sogliaAttuale = 3;
-
+                    changeMusic(3);
+                    changePsych(3);
                     //FARE COSE
                     break;
                 }
         }
+    }
+
+    private static void changePsych(int v)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static void changeMusic(int v)
+    {
+        
     }
 }
