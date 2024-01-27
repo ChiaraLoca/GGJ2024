@@ -17,9 +17,10 @@ public class obstacle : MonoBehaviour
         KeywordRecognizerManager.Instance.PhraseRecognized += PhraseRecognized;
     }
     
-    private void PhraseRecognized(string s)
+    private void PhraseRecognized(string s,int index)
     {
-        if (playerInWarningArea)
+        //index 0 contains command for jump
+        if (playerInWarningArea && index==0)
         {
             taskComplete = true;
         }
