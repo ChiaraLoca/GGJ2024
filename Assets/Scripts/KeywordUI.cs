@@ -15,10 +15,12 @@ public class KeywordUI : MonoBehaviour
         _inputField.onSubmit.AddListener((string str)=> {
             Submit(str); 
         });
+        GetComponentInChildren<Prompt>().write("YES");
     }
     private void Submit(string str)
     {
         KeywordRecognizerManager.Instance.Add(str,0);
-        _showCommand.text = str.ToUpper();
+        //_showCommand.text = str.ToUpper();
+        GetComponentInChildren<Prompt>().write(str.ToUpper());
     }
 }

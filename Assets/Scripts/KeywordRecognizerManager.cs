@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
 public class KeywordRecognizerManager : MonoBehaviour
 {
     public static KeywordRecognizerManager Instance;
+    private bool isUsable = true;
 
     public WordManager _wordManager = new WordManager();
     private void Awake()
@@ -24,15 +26,30 @@ public class KeywordRecognizerManager : MonoBehaviour
 
     void Start()
     {
-        _keyWordList = new List<String>() { "yes", "start", "settings", "exit" };
-
-        m_Recognizer = new KeywordRecognizer(_keyWordList.ToArray());
-        m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
-       /* foreach (var x in m_Recognizer.Keywords)
+       
+        try
         {
-            Debug.Log(x.ToString());
-        }*/
-        m_Recognizer.Start();
+            m_Recognizer = new KeywordRecognizer(_keyWordList.ToArray());
+        }
+        catch (Exception)
+        {
+            Debug.Log("Speech Recognition NOT supported");
+            isUsable = false;
+        }
+
+        if (isUsable)
+        {
+            m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
+            _keyWordList = new List<String>() { "yes", "start", "settings", "exit" };
+
+            m_Recognizer = new KeywordRecognizer(_keyWordList.ToArray());
+
+            /* foreach (var x in m_Recognizer.Keywords)
+             {
+                 Debug.Log(x.ToString());
+             }*/
+            m_Recognizer.Start();
+        }
     }
 
     public bool Add(string s, int index)
@@ -49,12 +66,15 @@ public class KeywordRecognizerManager : MonoBehaviour
     }
     public void Restart()
     {
-        m_Recognizer.Dispose();
-        m_Recognizer = null;
-        m_Recognizer = new KeywordRecognizer(_keyWordList.ToArray());
-        m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
-        
-        m_Recognizer.Start();
+            if (isUsable)
+            {
+                m_Recognizer.Dispose();
+                m_Recognizer = null;
+                m_Recognizer = new KeywordRecognizer(_keyWordList.ToArray());
+                m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
+
+                m_Recognizer.Start();
+            }
     }
 
     private void OnPhraseRecognized(PhraseRecognizedEventArgs args)
