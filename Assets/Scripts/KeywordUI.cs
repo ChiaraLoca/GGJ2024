@@ -22,5 +22,7 @@ public class KeywordUI : MonoBehaviour
         KeywordRecognizerManager.Instance.Add(str);
         //_showCommand.text = str.ToUpper();
         GetComponentInChildren<Prompt>().write(str.ToUpper());
+        _inputField.text = "";
+        _inputField.ActivateInputField();
     }
 }
