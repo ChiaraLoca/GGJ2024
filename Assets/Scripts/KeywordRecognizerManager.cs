@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
@@ -23,7 +24,15 @@ public class KeywordRecognizerManager : MonoBehaviour
     {
         _keyWord = new string[1];
         _keyWord[0] = "Yes";
-        m_Recognizer = new KeywordRecognizer(_keyWord);
+        try
+        {
+            m_Recognizer = new KeywordRecognizer(_keyWord);
+        }
+        catch (Exception)
+        {
+            Debug.Log("Speech Recognition NOT supported");
+        }
+
         m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
 
         m_Recognizer.Start();
