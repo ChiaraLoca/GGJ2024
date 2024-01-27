@@ -25,4 +25,32 @@ public class gameStatus : MonoBehaviour
     {
         
     }
+
+    public static void ChangeStatus(int status)
+    {
+        switch(status) 
+        {
+            case 1:
+                {
+                    sogliaAttuale = 1;
+
+                    //FARE COSE
+                    break;
+                }
+            case 2:
+                {
+                    sogliaAttuale = 2;
+
+                    //FARE COSE
+                    break;
+                }
+            case 3:
+                {
+                    sogliaAttuale = 3;
+
+                    //FARE COSE
+                    break;
+                }
+        }
+    }
 }

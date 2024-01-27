@@ -104,7 +104,7 @@ public class playerScript : MonoBehaviour
                 {
                     if (PsychCounter.Instance.GetMushrooms() >= gameStatus.primaSoglia)
                     {
-                        gameStatus.sogliaAttuale = 2;
+                        gameStatus.ChangeStatus(2);
                     }
                     break;
                 }
@@ -112,11 +112,11 @@ public class playerScript : MonoBehaviour
                 {
                     if (PsychCounter.Instance.GetMushrooms() >= gameStatus.secondaSoglia)
                     {
-                        gameStatus.sogliaAttuale = 3;
+                        gameStatus.ChangeStatus(3);
                     }
                     if (PsychCounter.Instance.GetMushrooms() < gameStatus.primaSoglia)
                     {
-                        gameStatus.sogliaAttuale = 1;
+                        gameStatus.ChangeStatus(1);
                     }
                     break;
                 }
@@ -125,7 +125,7 @@ public class playerScript : MonoBehaviour
                  
                     if (PsychCounter.Instance.GetMushrooms() < gameStatus.secondaSoglia)
                     {
-                        gameStatus.sogliaAttuale = 2;
+                        gameStatus.ChangeStatus(2);
                     }
                     break;
                 }
