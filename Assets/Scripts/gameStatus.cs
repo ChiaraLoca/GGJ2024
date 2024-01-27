@@ -61,7 +61,7 @@ public class gameStatus : MonoBehaviour
 
     private static void changePsych(int v)
     {
-        throw new NotImplementedException();
+        
     }
 
     private static void changeMusic(int v)
