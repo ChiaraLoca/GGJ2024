@@ -33,4 +33,9 @@ public class PsychCounter : MonoBehaviour
         GameObject newInstance = Instantiate(prefab, transform.GetChild(0));
         //fACCIO COSE
     }
+    public void DeleteMushrooms()
+    {
+        Destroy(transform.GetChild(0).GetChild(transform.GetChild(0).childCount-1));
+        //fACCIO COSE
+    }
 }
