@@ -98,7 +98,7 @@ public class playerScript : MonoBehaviour
 
     private void CheckSoglia()
     {
-        switch(gameStatus.sogliaAttuale)
+        switch(gameStatus.SogliaAttuale)
         {
             case 1:
                 {
