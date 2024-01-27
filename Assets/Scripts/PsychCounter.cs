@@ -15,7 +15,7 @@ public class PsychCounter : MonoBehaviour
     [SerializeField] GameObject prefab;
     [SerializeField] float OffsetX;
     [SerializeField] float OffsetY;
-
+    int mushrooms = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +31,18 @@ public class PsychCounter : MonoBehaviour
     public void AddMushrooms()
     {
         GameObject newInstance = Instantiate(prefab, transform.GetChild(0));
+        mushrooms++;
         //fACCIO COSE
     }
     public void DeleteMushrooms()
     {
-        Destroy(transform.GetChild(0).GetChild(transform.GetChild(0).childCount-1));
+        Destroy(transform.GetChild(0).GetChild(transform.GetChild(0).childCount - 1).gameObject);
+        mushrooms--;
         //fACCIO COSE
+    }
+
+    public int GetMushrooms()
+    {
+        return mushrooms;
     }
 }

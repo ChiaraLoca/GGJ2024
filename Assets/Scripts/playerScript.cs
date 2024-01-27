@@ -15,15 +15,15 @@ public class playerScript : MonoBehaviour
 
     Rigidbody2D rigidbody2D;
     Collider2D collider2D;
-
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         collider2D = GetComponent<Collider2D>();
         rigidbody2D.velocity = new Vector2(horizontalAcceleration, 0f);
-       
-
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
     }
 
     // Update is called once per frame
@@ -91,9 +91,45 @@ public class playerScript : MonoBehaviour
     {
         gameStatus.Mushrooms++;
         PsychCounter.Instance.AddMushrooms();
+        CheckSoglia();
         modifySpeed(collision.gameObject.GetComponent<mushroom>().StackValue);
         collision.gameObject.SetActive(false);
     }
 
- 
+    private void CheckSoglia()
+    {
+        switch(gameStatus.sogliaAttuale)
+        {
+            case 1:
+                {
+                    if (PsychCounter.Instance.GetMushrooms() >= gameStatus.primaSoglia)
+                    {
+                        gameStatus.sogliaAttuale = 2;
+                    }
+                    break;
+                }
+            case 2:
+                {
+                    if (PsychCounter.Instance.GetMushrooms() >= gameStatus.secondaSoglia)
+                    {
+                        gameStatus.sogliaAttuale = 3;
+                    }
+                    if (PsychCounter.Instance.GetMushrooms() < gameStatus.primaSoglia)
+                    {
+                        gameStatus.sogliaAttuale = 1;
+                    }
+                    break;
+                }
+            case 3:
+                {
+                 
+                    if (PsychCounter.Instance.GetMushrooms() < gameStatus.secondaSoglia)
+                    {
+                        gameStatus.sogliaAttuale = 2;
+                    }
+                    break;
+                }
+        }
+    }
 }
+
