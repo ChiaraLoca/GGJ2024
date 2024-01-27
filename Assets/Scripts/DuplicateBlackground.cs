@@ -17,7 +17,7 @@ public class DuplicateBlackground : MonoBehaviour
     {
         
     }
-
+/**
     private void OnValidate()
     {
 
@@ -27,4 +27,5 @@ public class DuplicateBlackground : MonoBehaviour
             newInstance.transform.position = new Vector3(newInstance.size.x * i, 1.2f, 0);
         }
     }
+*/
 }
