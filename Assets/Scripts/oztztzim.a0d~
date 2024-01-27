@@ -26,7 +26,7 @@ public class KeywordRecognizerManager : MonoBehaviour
 
     void Start()
     {
-        _keyWordList = new List<String>() { "yes", "start", "settings", "exit" };
+       
         try
         {
             m_Recognizer = new KeywordRecognizer(_keyWordList.ToArray());
@@ -40,6 +40,9 @@ public class KeywordRecognizerManager : MonoBehaviour
         if (isUsable)
         {
             m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
+            _keyWordList = new List<String>() { "yes", "start", "settings", "exit" };
+
+            m_Recognizer = new KeywordRecognizer(_keyWordList.ToArray());
 
             /* foreach (var x in m_Recognizer.Keywords)
              {
