@@ -4,28 +4,26 @@ using UnityEngine;
 
 public class DuplicateMarciapysis : MonoBehaviour
 {
-    [SerializeField] int nPezzi;
-    [SerializeField] SpriteRenderer prefab;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private int nPezzi;
+    [SerializeField] private GameObject prefab;
+    [SerializeField] private bool canValidate=true;
 
-    // Update is called once per frame
-    void Update()
+
+    /*private void OnValidate()
     {
-        
-    }
-/**
-    private void OnValidate()
-    {
-        
-        for (int i = 0; i < nPezzi; i++)
+        if (prefab != null && canValidate)
         {
-            SpriteRenderer newInstance = Instantiate(prefab, transform);
-            newInstance.transform.position = new Vector3(newInstance.size.x * i, 0, 0);
+            Debug.Log("DuplicateMarciapysis");
+                
+                for (int i = 0; i < nPezzi; i++)
+                {
+                    GameObject newInstance = Instantiate(prefab, transform);
+                    newInstance.transform.position = new Vector3(newInstance.GetComponent<SpriteRenderer>().size.x * i, 0, 0);
+                    newInstance.name = i + "_Floor";
+                }
+            
         }
-    }
-*/
+    }*/
 }
+
+
