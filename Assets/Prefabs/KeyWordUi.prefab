@@ -641,6 +641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showCommand: {fileID: 0}
   _inputField: {fileID: 3097762122439675884}
+  prompt: {fileID: 3271536319577237908}
 --- !u!1 &4810334796450995495
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ using UnityEngine.Windows.Speech;
 public class obstacle : MonoBehaviour
 {
     [SerializeField] int stackValue;
+    private Prompt prompt;
     private bool playerInWarningArea;
     private bool playerInJumpArea;
     private bool taskComplete = false;
@@ -15,6 +16,8 @@ public class obstacle : MonoBehaviour
     void Start()
     {
         KeywordRecognizerManager.Instance.PhraseRecognized += PhraseRecognized;
+        prompt = KeywordUI.instance.prompt;
+
     }
     
     private void PhraseRecognized(string s,int index)
@@ -37,11 +40,13 @@ public class obstacle : MonoBehaviour
 
     public void warningAreaEnter(Collider2D collision)
     {
+        prompt.warningZone(true);
         playerInWarningArea = true;
     }
 
     public void warningAreaExit(Collider2D collision)
     {
+        prompt.warningZone(false);
         playerInWarningArea = false;
     }
 
