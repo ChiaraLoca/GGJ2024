@@ -14,6 +14,7 @@ public class playerScript : MonoBehaviour
     [SerializeField] bool dead = false;
     [SerializeField] Animator animator;
     [SerializeField] StaticAudioSourceManager audioManager;
+    [SerializeField] SpriteRenderer fadeIn;
     bool isJumping = false;
     Rigidbody2D rigidbody2D;
     Collider2D collider2D;
@@ -24,6 +25,26 @@ public class playerScript : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         collider2D = GetComponent<Collider2D>();
         rigidbody2D.velocity = new Vector2(horizontalAcceleration, 0f);
+
+        StartCoroutine(waitAndDestroy(1,2));
+    }
+
+    IEnumerator waitAndDestroy(float timeAllBlack, float timeFade)
+    {
+        fadeIn.gameObject.SetActive(true);
+        yield return new WaitForSeconds(timeAllBlack);
+        
+        Color startScale = new Color(0,0,0,1);     // scale of the object at the end of the animation
+        Color targetScale = new Color(0,0,0,0);     // scale of the object at the end of the animation
+
+        for (float t = 0; t < 1; t += Time.deltaTime / timeFade)
+        {
+            fadeIn.color = new Color(0, 0, 0, 1 - t);
+            yield return null;
+        }
+        Destroy(fadeIn);
+    
+    
     }
 
     // Update is called once per frame
@@ -86,7 +107,7 @@ public class playerScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.transform.parent != null && collision.gameObject.transform.parent.GetComponent<DuplicateMarciapysis>())
+        if ( collision.gameObject.GetComponent<Floor>()!=null)
         {
             if (isJumping)
             {

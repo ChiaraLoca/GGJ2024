@@ -18,7 +18,7 @@ public class DuplicateBlackground : MonoBehaviour
         
     }
 
-   /* private void OnValidate()
+   private void OnValidate()
     {
 
         for (int i = 0; i < nPezzi; i++)
@@ -27,6 +27,6 @@ public class DuplicateBlackground : MonoBehaviour
             newInstance.transform.position = new Vector3(newInstance.GetComponent<SpriteRenderer>().size.x * i, 1.2f, 0);
             newInstance.name = i + "_Back";
         }
-    }*/
+    }
 
 }
