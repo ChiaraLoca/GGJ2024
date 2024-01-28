@@ -5,7 +5,7 @@ using UnityEngine;
 public class DuplicateBlackground : MonoBehaviour
 {
     [SerializeField] int nPezzi;
-    [SerializeField] SpriteRenderer prefab;
+    [SerializeField] GameObject prefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,15 +17,16 @@ public class DuplicateBlackground : MonoBehaviour
     {
         
     }
-/**
-    private void OnValidate()
+
+   /* private void OnValidate()
     {
 
         for (int i = 0; i < nPezzi; i++)
         {
-            SpriteRenderer newInstance = Instantiate(prefab, transform);
-            newInstance.transform.position = new Vector3(newInstance.size.x * i, 1.2f, 0);
+            GameObject newInstance = Instantiate(prefab, transform);
+            newInstance.transform.position = new Vector3(newInstance.GetComponent<SpriteRenderer>().size.x * i, 1.2f, 0);
+            newInstance.name = i + "_Back";
         }
-    }
-*/
+    }*/
+
 }
