@@ -101,6 +101,8 @@ public class playerScript : MonoBehaviour
             animator.SetTrigger("Jump");
             isJumping = true;
             audioManager.jump();
+
+            gameStatus.instance.nCorrectJump++;
         }
 
         

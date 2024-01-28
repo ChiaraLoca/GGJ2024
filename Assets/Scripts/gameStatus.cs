@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class gameStatus : MonoBehaviour
@@ -18,16 +19,26 @@ public class gameStatus : MonoBehaviour
 
     public static gameStatus instance;
 
+    public float nCorrectJump;
+    public float nCorrectNewWord;
+   
+
+
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void getScore()
+    {
+        float res = 100 * nCorrectJump + nCorrectNewWord * 100; ;
     }
 
     public void ChangeStatus(int status)
