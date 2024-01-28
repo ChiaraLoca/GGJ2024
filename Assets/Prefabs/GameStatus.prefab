@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ee1a23f27ba764b94f65436279caf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mushrooms: 0
+  mushroomsMax: 0
+  speedStack: 1
+  primaSoglia: 2
+  secondaSoglia: 4
+  audioManager: {fileID: 0}
