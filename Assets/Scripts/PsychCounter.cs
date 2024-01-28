@@ -31,6 +31,7 @@ public class PsychCounter : MonoBehaviour
     public void AddMushrooms()
     {
         GameObject newInstance = Instantiate(prefab, transform.GetChild(0));
+    //   newInstance.transform.position = new Vector3(OffsetX + 2f * transform.childCount, 1.2f, 0);
         mushrooms++;
         //fACCIO COSE
     }
