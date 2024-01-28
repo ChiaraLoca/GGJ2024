@@ -10,7 +10,7 @@ public class StaticAudioSourceManager : MonoBehaviour
     [SerializeField] AudioClip track2;
     [SerializeField] AudioClip track3;
     [SerializeField] AudioClip switchTrack;
-    [SerializeField] GameObject fx;
+    [SerializeField] FXScript fx;
     Coroutine coroutine;
     // Start is called before the first frame update
     void Start()
@@ -69,6 +69,20 @@ public class StaticAudioSourceManager : MonoBehaviour
         musicAudioSource.Play();
     }
 
+    public void jump()
+    {
+        fx.Jump();
+    }
+
+    public void obstacleHit()
+    {
+        fx.ObstacleHit();
+    }
+
+    public void mushroom()
+    {
+        fx.Mushroom();
+    }
 
 
 }
