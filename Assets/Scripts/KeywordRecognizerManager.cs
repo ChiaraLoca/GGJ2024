@@ -54,6 +54,7 @@ public class KeywordRecognizerManager : MonoBehaviour
         if (!_keyWordList.Contains(s) && !_keyWordList[index].Equals(s))
         {
             _keyWordList[index] = s;
+            
             res = true;
         }
         WordManager.Instance.Add(new Word(s.ToLower()));
@@ -88,6 +89,8 @@ public class KeywordRecognizerManager : MonoBehaviour
         {
             int index = _keyWordList.IndexOf(args.text);
             PhraseRecognized.Invoke(args.text, index);
+
+            WordManager.Instance.AddNewCorrectWord(args.text);
         }
     }
 

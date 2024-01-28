@@ -22,8 +22,10 @@ public class WordManager : MonoBehaviour
         }
     }
     List<Word> _wordList = new List<Word>();
+    List<Word> _wordListThisGame = new List<Word>();
+    List<Word> _correctWordListThisGame = new List<Word>();
 
-
+    public List<Word> WordListThisGame { get => _wordListThisGame; set => _wordListThisGame = value; }
 
     public void Load()
     {
@@ -45,7 +47,8 @@ public class WordManager : MonoBehaviour
     {
         if (!_wordList.Contains(s))
         { 
-            _wordList.Add(s); 
+            _wordList.Add(s);
+            _wordListThisGame.Add(s);
         }
     }
 
@@ -70,5 +73,16 @@ public class WordManager : MonoBehaviour
     public void OnDestroy()
     {
         Save();
+    }
+
+    internal void AddNewCorrectWord(string s)
+    {
+        Word w = new Word(s);
+
+        if (!_correctWordListThisGame.Contains(w)  && _wordListThisGame.Contains(w)) 
+        {
+            _correctWordListThisGame.Add(w);
+            gameStatus.instance.nCorrectNewWord++;
+        }
     }
 }
