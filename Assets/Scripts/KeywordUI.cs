@@ -21,9 +21,11 @@ public class KeywordUI : MonoBehaviour
 
     private void Start()
     {
+        _inputField.ActivateInputField();
         _inputField.onSubmit.AddListener((string str)=> {
             Submit(str); 
         });
+
         GetComponentInChildren<Prompt>().write("YES");
     }
     private void Submit(string str)

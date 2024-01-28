@@ -84,5 +84,9 @@ public class StaticAudioSourceManager : MonoBehaviour
         fx.Mushroom();
     }
 
-
+    internal void MusicVolume(float t)
+    {
+        AudioSource musicAudioSource = music.GetComponent<AudioSource>();
+        musicAudioSource.volume = t;
+    }
 }
