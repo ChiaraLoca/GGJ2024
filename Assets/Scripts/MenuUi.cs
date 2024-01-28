@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuUi : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class MenuUi : MonoBehaviour
     public void StartButtonClick()
     {
         Debug.Log("Start");
+        SceneManager.LoadScene("1_Intro");
     }
 
     public void SettingsButtonClick()
