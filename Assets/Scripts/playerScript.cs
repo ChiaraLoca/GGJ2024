@@ -13,6 +13,7 @@ public class playerScript : MonoBehaviour
     [SerializeField] int jumpSpeed;
     [SerializeField] bool dead = false;
     [SerializeField] Animator animator;
+    [SerializeField] StaticAudioSourceManager audioManager;
     bool isJumping = false;
     Rigidbody2D rigidbody2D;
     Collider2D collider2D;
@@ -50,6 +51,7 @@ public class playerScript : MonoBehaviour
 
             animator.SetTrigger("Jump");
             isJumping = true;
+            audioManager.jump();
         }
 
         
@@ -96,6 +98,7 @@ public class playerScript : MonoBehaviour
 
     private void obstacleImpact(Collider2D collision)
     {
+        audioManager.obstacleHit();
         modifySpeed(collision.gameObject.GetComponent<obstacle>().StackValue);
         PsychCounter.Instance.DeleteMushrooms();
         collision.enabled = false;
@@ -109,6 +112,7 @@ public class playerScript : MonoBehaviour
 
     private void collectMushroom(Collider2D collision)
     {
+        audioManager.mushroom();
         gameStatus.instance.Mushrooms++;
         PsychCounter.Instance.AddMushrooms();
         CheckSoglia();
