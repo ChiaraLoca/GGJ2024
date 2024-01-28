@@ -12,7 +12,8 @@ public class playerScript : MonoBehaviour
     [SerializeField] float baseSpeedIncrease;
     [SerializeField] int jumpSpeed;
     [SerializeField] bool dead = false;
-
+    [SerializeField] Animator animator;
+    bool isJumping = false;
     Rigidbody2D rigidbody2D;
     Collider2D collider2D;
 
@@ -46,6 +47,9 @@ public class playerScript : MonoBehaviour
         if (Input.GetKeyUp("space") || voiceTrigger)
         {
             rigidbody2D.velocity += new Vector2(0f, jumpSpeed);
+
+            animator.SetTrigger("Jump");
+            isJumping = true;
         }
 
         
@@ -57,7 +61,10 @@ public class playerScript : MonoBehaviour
         if (rigidbody2D.velocity.x>horizontalMaxSpeed) {
             rigidbody2D.velocity = new Vector2(horizontalMaxSpeed, rigidbody2D.velocity.y);
         }
+        float _speed = rigidbody2D.velocity.x*1/65;
 
+        
+        animator.SetFloat("Blend",_speed);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,6 +77,20 @@ public class playerScript : MonoBehaviour
         if (collision.gameObject.GetComponent<obstacle>() != null)
         {
             obstacleImpact(collision);
+        }
+
+         
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.transform.parent != null && collision.gameObject.transform.parent.GetComponent<DuplicateMarciapysis>())
+        {
+            if (isJumping)
+            {
+                animator.SetTrigger("EndJump");
+                isJumping = false;
+            }
         }
     }
 
