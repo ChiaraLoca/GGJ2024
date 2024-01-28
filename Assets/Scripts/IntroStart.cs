@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class IntroStart : MonoBehaviour
@@ -14,6 +15,7 @@ public class IntroStart : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(PlayVideo());
+        StartCoroutine(CambioScena());
     }
 
     // Update is called once per frame
@@ -24,9 +26,16 @@ public class IntroStart : MonoBehaviour
 
     public IEnumerator PlayVideo()
     {
-        yield return new WaitForSeconds(1.6f);
+        yield return new WaitForSeconds(2f);
         video.Play();
         
+    }
+
+    public IEnumerator CambioScena()
+    {
+        yield return new WaitForSeconds(7);
+        SceneManager.LoadScene("2_Level");
+
     }
 }
 

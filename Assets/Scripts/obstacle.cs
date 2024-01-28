@@ -55,6 +55,7 @@ public class obstacle : MonoBehaviour
         playerInJumpArea = true;
         if (taskComplete)
         {
+            GetComponent<BoxCollider2D>().enabled = false;
             collision.gameObject.GetComponent<playerScript>().Jump(true);
         }
     }

@@ -64,6 +64,7 @@ public class StaticAudioSourceManager : MonoBehaviour
             musicAudioSource.Play();
             yield return new WaitForSeconds(switchTrack.length);
         }
+        musicAudioSource.Stop();
         musicAudioSource.clip = track;
         musicAudioSource.loop = true;
         musicAudioSource.Play();
