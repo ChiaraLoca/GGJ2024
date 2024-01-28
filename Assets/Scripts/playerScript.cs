@@ -103,6 +103,7 @@ public class playerScript : MonoBehaviour
             audioManager.jump();
 
             gameStatus.instance.nCorrectJump++;
+            gameStatus.instance.calculateScore();
         }
 
         

@@ -83,6 +83,7 @@ public class WordManager : MonoBehaviour
         {
             _correctWordListThisGame.Add(w);
             gameStatus.instance.nCorrectNewWord++;
+            gameStatus.instance.calculateScore();
         }
     }
 }
