@@ -36,9 +36,9 @@ public class gameStatus : MonoBehaviour
     {
         
     }
-    public void getScore()
+    public float getScore()
     {
-        float res = 100 * nCorrectJump + nCorrectNewWord * 100; ;
+        return 100 * nCorrectJump + nCorrectNewWord * 100; ;
     }
 
     public void ChangeStatus(int status)
