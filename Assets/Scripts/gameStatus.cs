@@ -21,8 +21,8 @@ public class gameStatus : MonoBehaviour
 
     public float nCorrectJump;
     public float nCorrectNewWord;
-   
 
+    public static float score = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -38,9 +38,13 @@ public class gameStatus : MonoBehaviour
     }
     public float getScore()
     {
-        return 100 * nCorrectJump + nCorrectNewWord * 100; ;
-    }
 
+        return score;
+    }
+    public void calculateScore()
+    {
+        score = 100 * nCorrectNewWord + 100 * nCorrectJump;
+    }
     public void ChangeStatus(int status)
     {
         switch(status) 
