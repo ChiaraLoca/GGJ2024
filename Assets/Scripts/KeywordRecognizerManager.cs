@@ -75,7 +75,16 @@ public class KeywordRecognizerManager : MonoBehaviour
             }
     }
 
+    public void clearAndRestart()
+    {
+        _keyWordList.Clear();
+        if (isUsable)
+        {
+            m_Recognizer.Dispose();
+            m_Recognizer = null;
 
+        }
+    }
 
     private void OnPhraseRecognized(PhraseRecognizedEventArgs args)
     {

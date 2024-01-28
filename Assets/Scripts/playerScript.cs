@@ -64,7 +64,7 @@ public class playerScript : MonoBehaviour
         yield return new WaitForSeconds(timeAllBlack);
         //Destroy(fadeIn);
         fadeIn.gameObject.SetActive(false);
-
+        KeywordRecognizerManager.Instance.clearAndRestart();
         SceneManager.LoadScene("0_Menu", LoadSceneMode.Single);
     }
 
