@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerScript : MonoBehaviour
 {
@@ -26,25 +27,49 @@ public class playerScript : MonoBehaviour
         collider2D = GetComponent<Collider2D>();
         rigidbody2D.velocity = new Vector2(horizontalAcceleration, 0f);
 
-        StartCoroutine(waitAndDestroy(1,2));
+        StartCoroutine(fadeInIE(1,2));
     }
 
-    IEnumerator waitAndDestroy(float timeAllBlack, float timeFade)
+    IEnumerator fadeInIE(float timeAllBlack, float timeFade)
     {
         fadeIn.gameObject.SetActive(true);
         yield return new WaitForSeconds(timeAllBlack);
-        
-        Color startScale = new Color(0,0,0,1);     // scale of the object at the end of the animation
-        Color targetScale = new Color(0,0,0,0);     // scale of the object at the end of the animation
+
 
         for (float t = 0; t < 1; t += Time.deltaTime / timeFade)
         {
             fadeIn.color = new Color(0, 0, 0, 1 - t);
             yield return null;
         }
-        Destroy(fadeIn);
-    
-    
+        //Destroy(fadeIn);
+        fadeIn.gameObject.SetActive(false);
+
+    }
+
+    IEnumerator fadeOutIE(float timeAllBlack, float timeFade)
+    {
+        fadeIn.gameObject.SetActive(true);
+        yield return new WaitForSeconds(timeAllBlack);
+
+          // scale of the object at the end of the animation
+
+        for (float t = 0; t < 1; t += Time.deltaTime / timeFade)
+        {
+            audioManager.MusicVolume(t);
+
+            fadeIn.color = new Color(0, 0, 0,t);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(timeAllBlack);
+        //Destroy(fadeIn);
+        fadeIn.gameObject.SetActive(false);
+
+        SceneManager.LoadScene("0_Menu", LoadSceneMode.Single);
+    }
+
+    void Death() {
+        StartCoroutine(fadeOutIE(1,2));
     }
 
     // Update is called once per frame
@@ -61,6 +86,9 @@ public class playerScript : MonoBehaviour
             Debug.Log("DEATH TRIGGER");
             horizontalMaxSpeed = 0f;
             dead= true;
+
+            Death();
+
         }
     }
 
